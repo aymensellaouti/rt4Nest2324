@@ -14,6 +14,7 @@ import { FirstService } from './service/first.service';
 import { LoggerService } from '../logger/logger.service';
 import { MES_CONSTANTES } from '../config/constantes.config';
 import { FirstDto, UpdateFirstDto } from './dto/first.dto';
+import { First } from './entities/first.entity';
 /* first/cc */
 @Controller('first')
 /* @UseFilters(CustomFilter) */
@@ -35,13 +36,8 @@ export class FirstController {
     return this.uuid();
   }
   @Post('')
-  getPostCc(@Body() mesParams: FirstDto, @Query() mesquerys) {
-    console.log(' Is mesParams instanceof FirstDto ?');
-    console.log(mesParams instanceof FirstDto);
-
-    this.firstService.sayHello();
-    this.loggerService.logger('in cc');
-    return mesParams;
+  addFirst(@Body() first: FirstDto, @Query() mesquerys): Promise<First>{
+    return this.firstService.add(first);
   }
   @Patch('')
   patchCc(@Body() mesParams: UpdateFirstDto, @Query() mesquerys) {

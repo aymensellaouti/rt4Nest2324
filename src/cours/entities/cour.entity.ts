@@ -1,11 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('person')
-export class First {
+@Entity('cours')
+export class Cour {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({})
-  name: string;
   @Column()
-  age: number;
+  name: string;
 }

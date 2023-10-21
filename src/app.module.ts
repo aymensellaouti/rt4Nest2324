@@ -6,6 +6,7 @@ import { CommonModule } from './common/common.module';
 import { FirstMiddleware } from './middlewares/first/first.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { First } from './first/entities/first.entity';
+import { CoursModule } from './cours/cours.module';
 
 @Module({
   imports: [
@@ -19,10 +20,11 @@ import { First } from './first/entities/first.entity';
       username: 'root',
       password: '',
       database: 'rt42324',
-      entities: [First],
+      autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
+    CoursModule,
   ],
   controllers: [AppController],
   providers: [],
