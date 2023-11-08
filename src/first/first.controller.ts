@@ -8,13 +8,17 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { FirstService } from './service/first.service';
 import { LoggerService } from '../logger/logger.service';
 import { MES_CONSTANTES } from '../config/constantes.config';
 import { FirstDto, UpdateFirstDto } from './dto/first.dto';
 import { First } from './entities/first.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 /* first/cc */
 @Controller('first')
 /* @UseFilters(CustomFilter) */
@@ -28,15 +32,17 @@ export class FirstController {
   //first/cc
   /* Une route first/eliIji + method: Get */
   @Get('cc')
-  getCc(@Query() mesquerys) {
+  @UseGuards(AuthGuard('jwt'))
+  getCc(@Query() mesquerys, @Req() req) {
     console.log(' Is mesParams instanceof FirstDto ?');
+    console.log({ user: req.user });
 
     this.firstService.sayHello();
     this.loggerService.logger('in cc');
     return this.uuid();
   }
   @Post('')
-  addFirst(@Body() first: FirstDto, @Query() mesquerys): Promise<First>{
+  addFirst(@Body() first: FirstDto, @Query() mesquerys): Promise<First> {
     return this.firstService.add(first);
   }
   @Patch('')

@@ -7,6 +7,7 @@ import { FirstMiddleware } from './middlewares/first/first.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { First } from './first/entities/first.entity';
 import { CoursModule } from './cours/cours.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CoursModule } from './cours/cours.module';
       logging: true,
     }),
     CoursModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [],

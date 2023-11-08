@@ -20,7 +20,6 @@ export class User extends DateTimeStampEntity {
   })
   email: string;
   @Column()
-  @Exclude({ toPlainOnly: true })
   password: string;
 
   @Column({
